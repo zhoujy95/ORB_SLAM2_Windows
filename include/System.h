@@ -36,6 +36,16 @@
 #include "ORBVocabulary.h"
 #include "Viewer.h"
 
+#ifdef _MSC_VER
+#ifdef ORB_SLAM2_EXPORTS
+#define ORB_SLAM2_API __declspec(dllexport)
+#else
+#define ORB_SLAM2_API __declspec(dllimport)
+#endif
+#else
+#define ORB_SLAM2_API
+#endif
+
 namespace ORB_SLAM2
 {
 
@@ -46,7 +56,7 @@ class Tracking;
 class LocalMapping;
 class LoopClosing;
 
-class System
+class ORB_SLAM2_API System
 {
 public:
     // Input sensor
