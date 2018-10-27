@@ -27,7 +27,7 @@
 #ifndef G2O_OS_SPECIFIC_HH_
 #define G2O_OS_SPECIFIC_HH_
 
-#ifdef _WINDOWS
+#ifdef WINDOWS
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>

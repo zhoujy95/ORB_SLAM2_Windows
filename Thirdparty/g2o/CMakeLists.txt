@@ -24,7 +24,7 @@ endif(MSVC90)
 
 # Set the output directory for the build executables and libraries
 IF(WIN32)
-  SET(g2o_LIBRARY_OUTPUT_DIRECTORY ${g2o_SOURCE_DIR}/bin CACHE PATH "Target for the libraries")
+  SET(g2o_LIBRARY_OUTPUT_DIRECTORY ${g2o_SOURCE_DIR}/lib CACHE PATH "Target for the libraries")
 ELSE(WIN32)
   SET(g2o_LIBRARY_OUTPUT_DIRECTORY ${g2o_SOURCE_DIR}/lib CACHE PATH "Target for the libraries")
 ENDIF(WIN32)
@@ -37,10 +37,13 @@ SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${g2o_RUNTIME_OUTPUT_DIRECTORY})
 LIST(APPEND CMAKE_MODULE_PATH ${g2o_SOURCE_DIR}/cmake_modules)
 
 # Detect OS and define macros appropriately
-IF(UNIX)
-  ADD_DEFINITIONS(-DUNIX)
-  MESSAGE(STATUS "Compiling on Unix")
-ENDIF(UNIX)
+if(WIN32)
+  add_definitions(-DWINDOWS)
+  message(STATUS "Compiling on Windows")
+elseif(UNIX)
+  add_definitions(-DUNIX)
+  message(STATUS "Compiling on Unix")
+endif(WIN32)
 
 # Eigen library parallelise itself, though, presumably due to performance issues
 # OPENMP is experimental. We experienced some slowdown with it
